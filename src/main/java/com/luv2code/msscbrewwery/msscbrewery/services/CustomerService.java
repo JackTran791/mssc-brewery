@@ -1,4 +1,4 @@
-package com.luv2code.msscbrewwery.msscbrewery.web.services;
+package com.luv2code.msscbrewwery.msscbrewery.services;
 
 import com.luv2code.msscbrewwery.msscbrewery.web.model.CustomerDto;
 

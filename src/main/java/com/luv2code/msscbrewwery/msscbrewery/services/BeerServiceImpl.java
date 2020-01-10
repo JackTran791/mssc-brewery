@@ -1,6 +1,7 @@
-package com.luv2code.msscbrewwery.msscbrewery.web.services;
+package com.luv2code.msscbrewwery.msscbrewery.services;
 
 import com.luv2code.msscbrewwery.msscbrewery.web.model.BeerDto;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -9,12 +10,13 @@ import java.util.UUID;
  * @author Jack Tran
  */
 @Service
+@Slf4j
 public class BeerServiceImpl implements BeerService {
     @Override
     public BeerDto getBeerById(UUID beerId) {
         return BeerDto.builder().id(UUID.randomUUID())
-                .beerName("Heineken")
-                .beerStyle("Galaxy Cat")
+                .beerName("Galaxy Cat")
+                .beerStyle("Pale Ale")
                 .build();
     }
 
@@ -27,11 +29,11 @@ public class BeerServiceImpl implements BeerService {
 
     @Override
     public void updateBeer(UUID beerId, BeerDto beerDto) {
-        // TO DO- would add something here
+        //todo impl - would add a real impl to update beer
     }
 
     @Override
     public void deleteById(UUID beerId) {
-        // TO DO- would add something here
+        log.debug("Deleting a beer...");
     }
 }

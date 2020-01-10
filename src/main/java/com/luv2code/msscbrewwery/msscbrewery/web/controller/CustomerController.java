@@ -1,12 +1,13 @@
 package com.luv2code.msscbrewwery.msscbrewery.web.controller;
 
+import com.luv2code.msscbrewwery.msscbrewery.services.CustomerService;
 import com.luv2code.msscbrewwery.msscbrewery.web.model.CustomerDto;
-import com.luv2code.msscbrewwery.msscbrewery.web.services.CustomerService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 /**
@@ -28,7 +29,7 @@ public class CustomerController {
     }
 
     @PostMapping
-    public ResponseEntity handlePost(@RequestBody CustomerDto customerDto) {
+    public ResponseEntity handlePost(@Valid @RequestBody CustomerDto customerDto) {
         CustomerDto savedDto = customerService.savedNewCustomer(customerDto);
 
         HttpHeaders headers = new HttpHeaders();
@@ -38,7 +39,7 @@ public class CustomerController {
     }
 
     @PutMapping("/{customerId}")
-    public ResponseEntity handleupdate(@PathVariable UUID customerId, @RequestBody CustomerDto customerDto) {
+    public ResponseEntity handleupdate(@PathVariable UUID customerId, @Valid @RequestBody CustomerDto customerDto) {
         customerService.updateCustomer(customerId, customerDto);
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);
@@ -49,4 +50,15 @@ public class CustomerController {
     public void deleteCustomer(@PathVariable UUID customerId) {
         customerService.deleteById(customerId);
     }
+
+//    @ExceptionHandler(ConstraintViolationException.class)
+//    public ResponseEntity<List> validationErroHandler(ConstraintViolationException e) {
+//        List<String> errors = new ArrayList<>(e.getConstraintViolations().size());
+//
+//        e.getConstraintViolations().forEach(constraintViolation -> {
+//            errors.add(constraintViolation.getPropertyPath() + " : " + constraintViolation.getMessage());
+//        });
+//
+//        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+//    }
 }
